@@ -1,0 +1,16 @@
+{
+  "singleQuote": true,
+  "trailingComma": "all",
+  "endOfLine": "lf",
+  "tabWidth": 2,
+  "bracketSpacing": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@controllers\\/(.*)$",
+    "^@providers\\/(.*)$",
+    "^[\\w\\d-_]+\\/(.*)$",
+    "^\\.\\.\\/(.*)$",
+    "^\\.\\/(.*)$",
+    "^[./]"
+  ],
+}
