@@ -1,0 +1,5 @@
+flightsProviders:
+  - parser: CodingChallenge
+    url: https://coding-challenge.powerus.de/flight/source1
+  - parser: CodingChallenge
+    url: https://coding-challenge.powerus.de/flight/source2

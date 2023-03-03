@@ -1,16 +1,18 @@
 {
-  "singleQuote": true,
-  "trailingComma": "all",
-  "endOfLine": "lf",
-  "tabWidth": 2,
-  "bracketSpacing": true,
-  "importOrder": [
+  singleQuote: true,
+  trailingComma: "all",
+  endOfLine: "lf",
+  tabWidth: 2,
+  bracketSpacing: true,
+  importOrder: [
     "<THIRD_PARTY_MODULES>",
     "^@controllers\\/(.*)$",
     "^@providers\\/(.*)$",
     "^[\\w\\d-_]+\\/(.*)$",
     "^\\.\\.\\/(.*)$",
     "^\\.\\/(.*)$",
-    "^[./]"
+    "^[./]",
   ],
+  importOrderSeparation: true,
+  importOrderParserPlugins : ["typescript", "decorators-legacy"]
 }

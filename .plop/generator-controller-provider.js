@@ -4,28 +4,31 @@ const srcPath = `${rootPath}/src`;
 const typePath = {
   controller: `${srcPath}/controllers`,
   provider: `${srcPath}/providers`,
+  service: `${srcPath}/services`,
 };
 
 const typeName = {
   controller: 'controller',
   provider: 'service',
+  service: 'service',
 };
 
 module.exports = (plop) => {
   plop.setGenerator('cp', {
-    description: 'Generates controller or provider',
+    description:
+      'Generates controller, provider or service according to the project structure',
     prompts: [
       {
         type: 'list',
         name: 'type',
-        message: 'Controller or provider',
+        message: 'Controller, provider or service',
         choices: Object.keys(typePath),
       },
       {
         type: 'input',
         name: 'name',
         message:
-          'Enter name of the controller (e.g "flights" or "car manufacturers")',
+          'Enter name of the item (e.g "flights" or "car manufacturers")',
       },
     ],
     actions: ({ type }) => {

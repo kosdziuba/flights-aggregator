@@ -1,6 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+
 import { FlightsService } from '@providers/flights';
+
 import { GetFlightsResponseType } from './types';
 
 @ApiTags('flights')
