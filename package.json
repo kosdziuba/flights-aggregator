@@ -21,6 +21,7 @@
     "plop": "plop"
   },
   "dependencies": {
+    "@nestjs/cli": "^9.0.0",
     "@nestjs/axios": "^2.0.0",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.3.1",
@@ -37,7 +38,6 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
-    "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
