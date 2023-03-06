@@ -1,0 +1,16 @@
+import { Controller, Get } from '@nestjs/common';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Get{{pascalCase name}}Response } from './types';
+
+@ApiTags('example')
+@Controller('{{kebabCase name}}')
+export class {{pascalCase name}}Controller {
+  @Get()
+  @ApiOkResponse({
+    description: 'Returns "Example"',
+    type: Get{{pascalCase name}}Response,
+  })
+  async findAll(): Promise<Get{{pascalCase name}}Response> {
+    return { data: 'Example' };
+  }
+}

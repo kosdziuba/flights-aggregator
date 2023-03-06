@@ -1,0 +1,7 @@
+flightsProviders:
+  - loader: coding-challenge # which loader type to use
+    url: https://coding-challenge.powerus.de/flight/source1 # flights provider API url
+    ttl: 3600000 # cache TTL - how long provider data is valid
+  - loader: coding-challenge
+    url: https://coding-challenge.powerus.de/flight/source2
+    ttl: 3600000

@@ -1,0 +1,20 @@
+{
+  singleQuote: true,
+  trailingComma: "all",
+  endOfLine: "lf",
+  tabWidth: 2,
+  bracketSpacing: true,
+  printWidth: 120,
+  importOrder: [
+    "<THIRD_PARTY_MODULES>",
+    "^@controllers\\/(.*)$",
+    "^@providers\\/(.*)$",
+    "^@utils\\/(.*)$",
+    "^[\\w\\d-_]+\\/(.*)$",
+    "^\\.\\.\\/(.*)$",
+    "^\\.\\/(.*)$",
+    "^[./]",
+  ],
+  importOrderSeparation: true,
+  importOrderParserPlugins : ["typescript", "decorators-legacy"]
+}

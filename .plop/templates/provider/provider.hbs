@@ -1,0 +1,9 @@
+import { Injectable } from '@nestjs/common';
+import { {{pascalCase name}}Interface } from './types';
+
+@Injectable()
+export class {{pascalCase name}}Service {
+  getData(): {{pascalCase name}}Interface {
+    return { data: 'Example' };
+  }
+}

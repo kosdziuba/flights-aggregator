@@ -1,0 +1,20 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { {{pascalCase name}}Service } from './service';
+
+describe('{{pascalCase name}}Service', () => {
+  let {{camelCase name}}Service: {{pascalCase name}}Service;
+
+  beforeEach(async () => {
+    const moduleRef: TestingModule = await Test.createTestingModule({
+      providers: [{{pascalCase name}}Service],
+    }).compile();
+
+    {{camelCase name}}Service = moduleRef.get<{{pascalCase name}}Service>({{pascalCase name}}Service);
+  });
+
+  describe('root', () => {
+    it('should return "Example"', () => {
+      expect({{camelCase name}}Service.getData()).toEqual({ data: 'Example'});
+    });
+  });
+});
