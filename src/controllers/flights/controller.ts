@@ -16,7 +16,6 @@ export class FlightsController {
     type: GetFlightsResponseType,
   })
   async findAll(): Promise<GetFlightsResponseType> {
-    //TODO pagination (?)
     const flights = await this.flightsService.getFlights();
     return { data: flights, total: flights.length } as GetFlightsResponseType;
   }

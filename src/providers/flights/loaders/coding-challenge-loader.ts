@@ -25,8 +25,8 @@ export class CodingChallengeLoader extends BaseFlightsProviderLoader {
       price: entry['price'],
     };
     const uid =
-      `${flights.departingFlight.flightNumber}:${flights.departingFlight.departureDateTimeUtc}` +
-      `<->${flights.returnFlight.flightNumber}:${flights.returnFlight.departureDateTimeUtc}`;
+      `${flights.departingFlight.flightNumber}:${flights.departingFlight.departureDateTimeUtc.toJSON()}` +
+      `<->${flights.returnFlight.flightNumber}:${flights.returnFlight.departureDateTimeUtc.toJSON()}`;
     return { uid, flights };
   }
 
