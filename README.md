@@ -38,3 +38,22 @@ This is the coding challenge for PowerUs Fullstack developer position
 - NestJS
 - Jest
 - Swagger
+- Docker - docker-compose
+
+### Requirements:
+- Development requirements: `node.js` version **19** and `Redis` - for external cache (or you can use `Memcache`)
+- Local run requirements: requirements are the same as for **development**, or you can run it in docker (required to install `Docker` and `docker-compose`)
+
+### Configuration:
+
+The project configuration is based on ENV file. Just copy the [.env.example](.env.example) file and save it as `.env`.
+
+You can also specify which `.env` file to read via setting the file path in `ENV_FILE_PATH` evn variable.
+
+There also is config file for specifying flights providers - [flights-providers-config.yaml](flights-providers-config.yaml).
+
+### Run:
+
+- Development: run `npm run start:dev` this command will start the development server with hot reload.
+- Docker: run `docker-compose build` and then `docker-compose up -d` (run `docker-compose down` if you would like to stop the project). This will build and run the project with Redis cache.
+- Tests: run `npm run test`.

@@ -8,6 +8,7 @@ import { HashTable } from '@utils/types';
 
 export class CodingChallengeLoader extends BaseFlightsProviderLoader {
   protected parseResponseData(responseData: object): HashTable<ParsedFlightType> {
+    // converting response data to the unified format
     const flights = responseData['flights'] || [];
     return Object.fromEntries(
       flights.map((entry) => {
@@ -35,6 +36,9 @@ export class CodingChallengeLoader extends BaseFlightsProviderLoader {
     response: AxiosResponse<any>,
     resourceTtl = DEFAULT_RESOURCE_TTL,
   ): Promise<void> {
+    // storing all the implementation specific data in cache
+    // data - already parsed provider data
+    // etag - is required to check whether resource snapshot is the same as the data stored in cache (see mayApplyCache)
     await this.cacheManager.set(cacheKey, { data, etag: response.headers['etag'] }, resourceTtl);
   }
 

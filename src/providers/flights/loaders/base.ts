@@ -23,19 +23,20 @@ export class BaseFlightsProviderLoader {
   async load(url: string, resourceTtl = DEFAULT_RESOURCE_TTL): Promise<HashTable<ParsedFlightType>> {
     const cacheKey = `flights-${url}`;
     const cachedData: BaseCachedFlightsType = (await this.cacheManager.get(cacheKey)) || {};
-
+    // trying to receive data from provider within acceptable time
     const response = await makeRequest({ url, timeout: this.configService.get('loadersTimeout') }).catch(
       () => ({ status: HttpStatusCode.InternalServerError, data: {}, headers: {} } as AxiosResponse),
     );
-    debugger;
+    // if request failed or reached timeout - return cached data (or empty data if there is no cache yet)
     if (response.status !== HttpStatusCode.Ok) {
       return cachedData['data'] || {};
     }
-
+    // checking conditions whether we can return data from cache
+    // or provider returned a different snapshot of data
     if (this.mayApplyCache(response, cachedData)) {
       return cachedData['data'];
     }
-
+    // processing/parsing provider data and updating cache for the resource
     const responseData = camelizeKeys(response.data);
     const result = this.parseResponseData(responseData);
     await this.setCache(cacheKey, result, response, resourceTtl);

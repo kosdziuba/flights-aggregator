@@ -5,7 +5,6 @@ import { AxiosResponse, HttpStatusCode } from 'axios';
 import { Cache } from 'cache-manager';
 
 import { BaseFlightsProviderLoader } from '@providers/flights/loaders/base';
-import { BaseCachedFlightsType } from '@providers/flights/loaders/types';
 
 import * as utilsRequestsModule from '@utils/requests';
 
@@ -73,7 +72,7 @@ const PARSED_RESPONSE_DATA = {
   ],
 };
 
-const DATA_STORED_IN_CACHE: BaseCachedFlightsType = {
+const DATA_STORED_IN_CACHE = {
   data: {
     testFlightUid: {
       departingFlight: {

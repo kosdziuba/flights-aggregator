@@ -5,10 +5,8 @@ import { AxiosResponse, HttpStatusCode } from 'axios';
 import { Cache } from 'cache-manager';
 
 import { CodingChallengeLoader } from '@providers/flights/loaders/coding-challenge-loader';
-import { CachedFlightsType, ParsedFlightType } from '@providers/flights/loaders/types';
 
 import * as utilsRequestsModule from '@utils/requests';
-import { HashTable } from '@utils/types';
 
 import { AppModule } from '../../../../app.module';
 
@@ -44,7 +42,7 @@ const RESOURCE_SUCCESSFUL_RESPONSE: AxiosResponse = {
   headers: { etag: 'testEtag' },
 };
 
-const PARSED_RESPONSE_DATA: HashTable<ParsedFlightType> = {
+const PARSED_RESPONSE_DATA = {
   '8545:2019-08-08T20:25:00.000Z<->145:2019-08-10T06:50:00.000Z': {
     departingFlight: {
       originName: 'Schonefeld',
@@ -98,7 +96,7 @@ const RESOURCE_SUCCESSFUL_RESPONSE_WITH_DIFFERENT_ETAG: AxiosResponse = {
   headers: { etag: 'testEtag2' },
 };
 
-const PARSED_RESPONSE_DATA_DIFFERENT_ETAG: HashTable<ParsedFlightType> = {
+const PARSED_RESPONSE_DATA_DIFFERENT_ETAG = {
   '18545:2022-08-08T20:25:00.000Z<->1145:2022-08-10T06:50:00.000Z': {
     departingFlight: {
       originName: 'Schonefeld',
@@ -120,7 +118,7 @@ const PARSED_RESPONSE_DATA_DIFFERENT_ETAG: HashTable<ParsedFlightType> = {
   },
 };
 
-const DATA_STORED_IN_CACHE: CachedFlightsType = {
+const DATA_STORED_IN_CACHE = {
   data: {
     testFlightUid: {
       departingFlight: {

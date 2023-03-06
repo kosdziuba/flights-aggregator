@@ -12,6 +12,7 @@ interface RequesterInterface {
   timeout?: number;
 }
 
+// timeout also includes the time required to establish connection
 export const makeRequest = async ({
   url,
   method = RequestMethods.GET,
