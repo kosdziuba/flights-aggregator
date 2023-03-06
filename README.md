@@ -41,6 +41,7 @@ This is the coding challenge for PowerUs Fullstack developer position
 - Docker - docker-compose
 
 ### Requirements:
+
 - Development requirements: `node.js` version **19** and `Redis` - for external cache (or you can use `Memcache`)
 - Local run requirements: requirements are the same as for **development**, or you can run it in docker (required to install `Docker` and `docker-compose`)
 
@@ -57,3 +58,9 @@ There also is config file for specifying flights providers - [flights-providers-
 - Development: run `npm run start:dev` this command will start the development server with hot reload.
 - Docker: run `docker-compose build` and then `docker-compose up -d` (run `docker-compose down` if you would like to stop the project). This will build and run the project with Redis cache.
 - Tests: run `npm run test`.
+
+### Development:
+
+- Project has `plop` generation, so if you need to add a new controller of provider just use `plop` and it will generate it in the right place with the right structure.
+- All the API response body keys are converted to `snake_case` via [snake-case.interceptor.ts](src%2Finterceptors%2Fsnake-case.interceptor.ts), so you can write your controller DTO properties in `camelCase`. Also take a look at `@SCApiProperty` decorator - it will help to convert your swagger API response body keys to `snake_case`.
+- Use `fast-case` lib for your case conversions.
