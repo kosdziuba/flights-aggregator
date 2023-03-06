@@ -1,6 +1,7 @@
 export interface BaseConfigInterface {
   host?: string;
   port?: number;
+  loadersTimeout?: number;
 }
 
 export interface CacheConfigInterface {
@@ -11,6 +12,7 @@ export interface CacheConfigInterface {
 export interface FlightProviderInterface {
   parser: string;
   url: string;
+  ttl: number;
 }
 
 export interface FlightsProvidersConfigInterface {

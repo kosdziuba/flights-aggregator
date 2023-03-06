@@ -5,11 +5,8 @@ import { join } from 'path';
 import { FlightsProvidersConfigInterface } from './types';
 
 const CONFIG_FILENAME =
-  process.env.FLIGHTS_PROVIDERS_CONFIG_PATH ||
-  '../flights-providers-config.yaml';
+  process.env.FLIGHTS_PROVIDERS_CONFIG_PATH || join(__dirname, '../flights-providers-config.yaml');
 
 export const flightsProviders = (): FlightsProvidersConfigInterface => {
-  return yaml.load(
-    readFileSync(join(__dirname, CONFIG_FILENAME), 'utf8'),
-  ) as FlightsProvidersConfigInterface;
+  return yaml.load(readFileSync(CONFIG_FILENAME, 'utf8')) as FlightsProvidersConfigInterface;
 };

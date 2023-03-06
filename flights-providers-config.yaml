@@ -1,5 +1,7 @@
 flightsProviders:
-  - parser: CodingChallenge
+  - loader: coding-challenge
     url: https://coding-challenge.powerus.de/flight/source1
-  - parser: CodingChallenge
+    ttl: 3600000
+  - loader: coding-challenge
     url: https://coding-challenge.powerus.de/flight/source2
+    ttl: 3600000

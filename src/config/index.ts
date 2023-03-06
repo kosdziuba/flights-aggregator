@@ -1,3 +1,3 @@
 export * from './base';
 export * from './cache';
-export * from './flightsProviders';
+export * from './flights-providers';
