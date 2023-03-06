@@ -12,16 +12,16 @@ const MERGED_FLIGHTS_LIST: ParsedFlightType[] = [
     departingFlight: {
       originName: 'originName',
       destinationName: 'destinationName',
-      departureDateTimeUtc: '2019-08-08T20:25:00.000Z',
-      arrivalDateTimeUtc: '2019-08-08T22:25:00.000Z',
+      departureDateTimeUtc: new Date('2019-08-08T20:25:00.000Z'),
+      arrivalDateTimeUtc: new Date('2019-08-08T22:25:00.000Z'),
       flightNumber: '8545',
       duration: 120,
     },
     returnFlight: {
       originName: 'originName',
       destinationName: 'destinationName',
-      departureDateTimeUtc: '2019-08-10T06:50:00.000Z',
-      arrivalDateTimeUtc: '2019-08-10T08:40:00.000Z',
+      departureDateTimeUtc: new Date('2019-08-10T06:50:00.000Z'),
+      arrivalDateTimeUtc: new Date('2019-08-10T08:40:00.000Z'),
       flightNumber: '145',
       duration: 110,
     },
@@ -31,16 +31,16 @@ const MERGED_FLIGHTS_LIST: ParsedFlightType[] = [
     departingFlight: {
       originName: 'destinationName',
       destinationName: 'originName',
-      departureDateTimeUtc: '2022-08-08T20:25:00.000Z',
-      arrivalDateTimeUtc: '2022-08-08T22:25:00.000Z',
+      departureDateTimeUtc: new Date('2022-08-08T20:25:00.000Z'),
+      arrivalDateTimeUtc: new Date('2022-08-08T22:25:00.000Z'),
       flightNumber: '18545',
       duration: 120,
     },
     returnFlight: {
       originName: 'originName',
       destinationName: 'destinationName',
-      departureDateTimeUtc: '2022-08-10T06:50:00.000Z',
-      arrivalDateTimeUtc: '2022-08-10T08:40:00.000Z',
+      departureDateTimeUtc: new Date('2022-08-10T06:50:00.000Z'),
+      arrivalDateTimeUtc: new Date('2022-08-10T08:40:00.000Z'),
       flightNumber: '1145',
       duration: 110,
     },
@@ -50,16 +50,16 @@ const MERGED_FLIGHTS_LIST: ParsedFlightType[] = [
     departingFlight: {
       originName: 'destinationName',
       destinationName: 'originName',
-      departureDateTimeUtc: '2022-06-08T20:25:00.000Z',
-      arrivalDateTimeUtc: '2022-08-08T22:25:00.000Z',
+      departureDateTimeUtc: new Date('2022-06-08T20:25:00.000Z'),
+      arrivalDateTimeUtc: new Date('2022-08-08T22:25:00.000Z'),
       flightNumber: '18500',
       duration: 120,
     },
     returnFlight: {
       originName: 'originName',
       destinationName: 'destinationName',
-      departureDateTimeUtc: '2022-06-10T06:50:00.000Z',
-      arrivalDateTimeUtc: '2022-06-10T08:40:00.000Z',
+      departureDateTimeUtc: new Date('2022-06-10T06:50:00.000Z'),
+      arrivalDateTimeUtc: new Date('2022-06-10T08:40:00.000Z'),
       flightNumber: '1120',
       duration: 110,
     },
@@ -82,6 +82,6 @@ describe('FlightsController', () => {
 
   it('findAll - should return parsed results', async () => {
     jest.spyOn(flightsService, 'getFlights').mockImplementation(() => Promise.resolve(MERGED_FLIGHTS_LIST));
-    expect(await flightsController.findAll()).toEqual({ data: MERGED_FLIGHTS_LIST, total: 3 });
+    expect(await flightsController.findAll()).toEqual({ data: MERGED_FLIGHTS_LIST, total: MERGED_FLIGHTS_LIST.length });
   });
 });
