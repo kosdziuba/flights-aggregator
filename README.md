@@ -36,18 +36,23 @@ This is the coding challenge for PowerUs Fullstack developer position
 
 - TypeScript
 - NestJS
+- Prisma
 - Jest
 - Swagger
+- MongoDB
 - Docker - docker-compose
 
 ### Requirements:
 
-- Development requirements: `node.js` version **19** and `Redis` - for external cache (or you can use `Memcache`)
+- Development requirements: `node.js` version **19** and `MongoDB`. It is required by Prisma to have MongoDB replicaset configured. If you don't have it configured locally (or in Docker) then I would suggest to use Mongo Atlas service, it's free (for study usage) and easy in setup (*I'll send the DB credentials in email). 
+
 - Local run requirements: requirements are the same as for **development**, or you can run it in docker (required to install `Docker` and `docker-compose`)
 
 ### Configuration:
 
-The project configuration is based on ENV file. Just copy the [.env.example](.env.example) file and save it as `.env`.
+The project configuration is based on ENV file. Just copy (and edit) the [.env.example](.env.example) file and save it as `.env`.
+
+If you're going to run it in docker, then copy (and edit) the [.env.docker.example](.env.docker.example) file to `.docker/app/.env.docker`.
 
 You can also specify which `.env` file to read via setting the file path in `ENV_FILE_PATH` evn variable.
 
