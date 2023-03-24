@@ -1,12 +1,8 @@
 export interface BaseConfigInterface {
+  appScope?: string;
   host?: string;
   port?: number;
   loadersTimeout?: number;
-}
-
-export interface CacheConfigInterface {
-  cacheHost?: string;
-  cachePort?: number;
 }
 
 export interface FlightProviderInterface {

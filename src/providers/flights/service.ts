@@ -1,28 +1,27 @@
-import { CACHE_MANAGER, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Cache } from 'cache-manager';
 
-import { HashTable } from '@utils/types';
+import { BaseFlightsProviderLoader } from '@providers/flights/loaders/base';
+import { FlightsInfoWithRelations } from '@providers/flights/types';
+import { PrismaService } from '@providers/prisma';
 
-import { getLoadersMap } from './loaders';
-import { ParsedFlightType } from './loaders/types';
+import { LOADERS_MAP } from './loaders';
 
 @Injectable()
 export class FlightsService {
-  constructor(private configService: ConfigService, @Inject(CACHE_MANAGER) private cacheManager: Cache) {}
-  async getFlights(): Promise<ParsedFlightType[]> {
-    let results: HashTable<ParsedFlightType> = {};
-    // getting available flights in parallel
-    const loadersMap = getLoadersMap(this.cacheManager, this.configService);
-    const loadedResults: HashTable<ParsedFlightType>[] = await Promise.all(
-      this.configService
-        .get('flightsProviders')
-        .map((provider) => loadersMap[provider.loader].load(provider.url, provider.ttl)),
-    );
-    // removing the duplicates
-    loadedResults.map((part) => {
-      results = { ...results, ...part };
+  constructor(private configService: ConfigService, private prisma: PrismaService) {}
+  async getFlights(): Promise<FlightsInfoWithRelations[]> {
+    return this.prisma.flightsInfo.findMany({
+      include: {
+        departingFlight: true,
+        returnFlight: true,
+      },
     });
-    return Object.values(results);
+  }
+
+  getFlightsLoaders(): BaseFlightsProviderLoader[] {
+    return this.configService
+      .get('flightsProviders')
+      .map((provider) => new LOADERS_MAP[provider.loader](provider.url, this.configService));
   }
 }

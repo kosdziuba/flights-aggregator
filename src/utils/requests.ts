@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+import axiosRetry from 'axios-retry';
 
 export enum RequestMethods {
   GET = 'get',
@@ -10,6 +11,7 @@ interface RequesterInterface {
   method?: RequestMethods;
   data?: object;
   timeout?: number;
+  retries?: number;
 }
 
 // timeout also includes the time required to establish connection
@@ -18,6 +20,7 @@ export const makeRequest = async ({
   method = RequestMethods.GET,
   data = {},
   timeout = 0,
+  retries = 0,
 }: RequesterInterface): Promise<AxiosResponse<any>> => {
   const requestConfig = { url, method };
 
@@ -29,5 +32,8 @@ export const makeRequest = async ({
     requestConfig['signal'] = AbortSignal.timeout(timeout);
   }
 
-  return axios(requestConfig);
+  const client = axios.create(requestConfig);
+  if (retries) axiosRetry(client, { retries: retries, retryDelay: axiosRetry.exponentialDelay });
+
+  return client.request(requestConfig);
 };

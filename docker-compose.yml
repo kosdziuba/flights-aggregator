@@ -11,13 +11,15 @@ services:
     depends_on:
       - app
 
-  cache:
-    image: redis:7-alpine
-
   app:
     build:
       context: .
-      dockerfile: .docker/Dockerfile
+      dockerfile: .docker/app/Dockerfile
     restart: always
-    depends_on:
-      - cache
+
+  tasks:
+    build:
+      context: .
+      dockerfile: .docker/app/Dockerfile
+    restart: always
+    command: /bin/sh -c "APP_SCOPE=tasks ./docker-entrypoint.sh"

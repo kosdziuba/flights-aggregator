@@ -1,20 +1,22 @@
 import { HttpModule } from '@nestjs/axios';
-import { CacheModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { RouterModule } from '@nestjs/core';
+import { ScheduleModule } from '@nestjs/schedule';
 import * as process from 'process';
 
 import { FlightsController } from '@controllers/flights';
 
-import { CacheConfigService } from '@providers/cache_config_service';
 import { FlightsService } from '@providers/flights';
+import { PrismaService } from '@providers/prisma';
+import { TasksService } from '@providers/tasks';
 
-import { base, cache, flightsProviders } from './config';
+import { base, flightsProviders } from './config';
 
 @Module({
   imports: [HttpModule],
   controllers: [FlightsController],
-  providers: [FlightsService],
+  providers: [FlightsService, PrismaService],
 })
 class ApiModule {}
 
@@ -23,17 +25,23 @@ class ApiModule {}
     ConfigModule.forRoot({
       envFilePath: process.env.ENV_FILE_PATH || '.env',
       isGlobal: true,
-      load: [base, flightsProviders, cache],
-    }),
-    CacheModule.registerAsync({
-      imports: [ConfigModule],
-      useClass: CacheConfigService,
-      isGlobal: true,
-      inject: [ConfigModule],
+      load: [base, flightsProviders],
     }),
     ApiModule,
     RouterModule.register([{ path: 'api', module: ApiModule }]),
   ],
-  providers: [CacheConfigService],
 })
 export class AppModule {}
+
+@Module({
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: process.env.ENV_FILE_PATH || '.env',
+      isGlobal: true,
+      load: [base, flightsProviders],
+    }),
+    ScheduleModule.forRoot(),
+  ],
+  providers: [PrismaService, TasksService, FlightsService],
+})
+export class TasksModule {}

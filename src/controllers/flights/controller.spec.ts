@@ -1,69 +1,66 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { FlightsService } from '@providers/flights';
-import { ParsedFlightType } from '@providers/flights/loaders/types';
+import { FlightsInfoWithRelations } from '@providers/flights/types';
 
 import { AppModule } from '../../app.module';
 
 import { FlightsController } from './controller';
 
-const MERGED_FLIGHTS_LIST: ParsedFlightType[] = [
+const MERGED_FLIGHTS_LIST: FlightsInfoWithRelations[] = [
   {
+    id: '8545:2019-08-08T20:25:00.000Z#145:2019-08-10T06:50:00.000Z',
+    departingFlightId: '8545:2019-08-08T20:25:00.000Z',
+    returnFlightId: '8545:2019-08-08T20:25:00.000Z',
+    price: 134.81,
+    available: true,
     departingFlight: {
-      originName: 'originName',
-      destinationName: 'destinationName',
+      id: '8545:2019-08-08T20:25:00.000Z',
+      originName: 'Schonefeld',
+      destinationName: 'Stansted',
       departureDateTimeUtc: new Date('2019-08-08T20:25:00.000Z'),
       arrivalDateTimeUtc: new Date('2019-08-08T22:25:00.000Z'),
       flightNumber: '8545',
       duration: 120,
+      available: true,
     },
     returnFlight: {
-      originName: 'originName',
-      destinationName: 'destinationName',
-      departureDateTimeUtc: new Date('2019-08-10T06:50:00.000Z'),
-      arrivalDateTimeUtc: new Date('2019-08-10T08:40:00.000Z'),
-      flightNumber: '145',
-      duration: 110,
+      id: '8545:2019-08-08T20:25:00.000Z',
+      originName: 'Schonefeld',
+      destinationName: 'Stansted',
+      departureDateTimeUtc: new Date('2019-08-08T20:25:00.000Z'),
+      arrivalDateTimeUtc: new Date('2019-08-08T22:25:00.000Z'),
+      flightNumber: '8545',
+      duration: 120,
+      available: true,
     },
-    price: 134.81,
   },
   {
+    id: '146:2019-08-08T16:00:00.000Z#145:2019-08-10T06:50:00.000Z',
+    departingFlightId: '146:2019-08-08T16:00:00.000Z',
+    returnFlightId: '146:2019-08-08T16:00:00.000Z',
+    price: 147.9,
+    available: true,
     departingFlight: {
-      originName: 'destinationName',
-      destinationName: 'originName',
-      departureDateTimeUtc: new Date('2022-08-08T20:25:00.000Z'),
-      arrivalDateTimeUtc: new Date('2022-08-08T22:25:00.000Z'),
-      flightNumber: '18545',
-      duration: 120,
+      id: '146:2019-08-08T16:00:00.000Z',
+      originName: 'Schonefeld',
+      destinationName: 'Stansted',
+      departureDateTimeUtc: new Date('2019-08-08T16:00:00.000Z'),
+      arrivalDateTimeUtc: new Date('2019-08-08T17:55:00.000Z'),
+      flightNumber: '146',
+      duration: 115,
+      available: true,
     },
     returnFlight: {
-      originName: 'originName',
-      destinationName: 'destinationName',
-      departureDateTimeUtc: new Date('2022-08-10T06:50:00.000Z'),
-      arrivalDateTimeUtc: new Date('2022-08-10T08:40:00.000Z'),
-      flightNumber: '1145',
-      duration: 110,
+      id: '146:2019-08-08T16:00:00.000Z',
+      originName: 'Schonefeld',
+      destinationName: 'Stansted',
+      departureDateTimeUtc: new Date('2019-08-08T16:00:00.000Z'),
+      arrivalDateTimeUtc: new Date('2019-08-08T17:55:00.000Z'),
+      flightNumber: '146',
+      duration: 115,
+      available: true,
     },
-    price: 150.81,
-  },
-  {
-    departingFlight: {
-      originName: 'destinationName',
-      destinationName: 'originName',
-      departureDateTimeUtc: new Date('2022-06-08T20:25:00.000Z'),
-      arrivalDateTimeUtc: new Date('2022-08-08T22:25:00.000Z'),
-      flightNumber: '18500',
-      duration: 120,
-    },
-    returnFlight: {
-      originName: 'originName',
-      destinationName: 'destinationName',
-      departureDateTimeUtc: new Date('2022-06-10T06:50:00.000Z'),
-      arrivalDateTimeUtc: new Date('2022-06-10T08:40:00.000Z'),
-      flightNumber: '1120',
-      duration: 110,
-    },
-    price: 150.81,
   },
 ];
 
@@ -81,7 +78,9 @@ describe('FlightsController', () => {
   });
 
   it('findAll - should return parsed results', async () => {
-    jest.spyOn(flightsService, 'getFlights').mockImplementation(() => Promise.resolve(MERGED_FLIGHTS_LIST));
+    jest
+      .spyOn(flightsService, 'getFlights')
+      .mockImplementation(() => Promise.resolve(MERGED_FLIGHTS_LIST as FlightsInfoWithRelations[]));
     expect(await flightsController.findAll()).toEqual({ data: MERGED_FLIGHTS_LIST, total: MERGED_FLIGHTS_LIST.length });
   });
 });
