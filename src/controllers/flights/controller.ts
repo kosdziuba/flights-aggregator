@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { plainToClass } from 'class-transformer';
 
 import { FlightsService } from '@providers/flights';
 
@@ -17,6 +18,13 @@ export class FlightsController {
   })
   async findAll(): Promise<GetFlightsResponseType> {
     const flights = await this.flightsService.getFlights();
-    return { data: flights, total: flights.length } as GetFlightsResponseType;
+    return plainToClass(
+      GetFlightsResponseType,
+      { data: flights, total: flights.length },
+      {
+        excludeExtraneousValues: true,
+        enableImplicitConversion: true,
+      },
+    );
   }
 }

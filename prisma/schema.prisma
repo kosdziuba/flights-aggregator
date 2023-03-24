@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url = env("DATABASE_URL")
+}
+
+model Flight {
+  id                    String @id @map("_id")
+  originName            String
+  destinationName       String
+  departureDateTimeUtc  DateTime
+  arrivalDateTimeUtc    DateTime
+  flightNumber          String
+  duration              Int
+  asDepartingFlight     FlightsInfo[] @relation("departingFlight")
+  asReturnFlight        FlightsInfo[]  @relation("returnFlight")
+  available             Boolean
+}
+
+model FlightsInfo {
+  id                String  @id @map("_id")
+  departingFlight   Flight?  @relation("departingFlight", fields: [departingFlightId], references: [id], onDelete: Cascade)
+  departingFlightId String?
+  returnFlight      Flight?  @relation("returnFlight", fields: [returnFlightId], references: [id], onDelete: Cascade)
+  returnFlightId    String?
+  price             Float
+  available         Boolean
+}
